@@ -4,10 +4,10 @@
 # Using build pattern: make
 #
 Name     : clr-rpm-config
-Version  : 263
-Release  : 261
-URL      : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-263.tar.xz
-Source0  : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-263.tar.xz
+Version  : 264
+Release  : 262
+URL      : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-264.tar.xz
+Source0  : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-264.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -30,28 +30,28 @@ license components for the clr-rpm-config package.
 
 
 %prep
-%setup -q -n clr-rpm-config-263
-cd %{_builddir}/clr-rpm-config-263
+%setup -q -n clr-rpm-config-264
+cd %{_builddir}/clr-rpm-config-264
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682958380
+export SOURCE_DATE_EPOCH=1683060578
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1682958380
+export SOURCE_DATE_EPOCH=1683060578
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/clr-rpm-config
 cp %{_builddir}/clr-rpm-config-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/clr-rpm-config/4cc77b90af91e615a64ae04893fdffa7939db84c || :
