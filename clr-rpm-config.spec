@@ -4,10 +4,10 @@
 # Using build pattern: make
 #
 Name     : clr-rpm-config
-Version  : 264
-Release  : 262
-URL      : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-264.tar.xz
-Source0  : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-264.tar.xz
+Version  : 265
+Release  : 263
+URL      : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-265.tar.xz
+Source0  : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-265.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -30,15 +30,18 @@ license components for the clr-rpm-config package.
 
 
 %prep
-%setup -q -n clr-rpm-config-264
-cd %{_builddir}/clr-rpm-config-264
+%setup -q -n clr-rpm-config-265
+cd %{_builddir}/clr-rpm-config-265
+pushd ..
+cp -a clr-rpm-config-265 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683060578
+export SOURCE_DATE_EPOCH=1688402521
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -49,12 +52,23 @@ export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -f
 export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 make  %{?_smp_mflags}
 
+pushd ../buildavx2
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+make  %{?_smp_mflags}
+popd
 
 %install
-export SOURCE_DATE_EPOCH=1683060578
+export SOURCE_DATE_EPOCH=1688402521
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/clr-rpm-config
 cp %{_builddir}/clr-rpm-config-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/clr-rpm-config/4cc77b90af91e615a64ae04893fdffa7939db84c || :
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
 ## install_append content
 mkdir -p %{buildroot}/usr/lib/rpm
@@ -66,6 +80,7 @@ ln -s clr %{buildroot}/usr/lib/rpm/pc
 rm -f %{buildroot}/usr/lib/rpm/clr/perl.prov
 ln -s /usr/lib/rpm/perl.prov %{buildroot}/usr/lib/rpm/clr/perl.prov
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
