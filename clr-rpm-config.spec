@@ -6,10 +6,10 @@
 # autospec commit: fbcebd0
 #
 Name     : clr-rpm-config
-Version  : 276
-Release  : 274
-URL      : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-276.tar.xz
-Source0  : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-276.tar.xz
+Version  : 277
+Release  : 275
+URL      : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-277.tar.xz
+Source0  : http://localhost/cgit/projects/clr-rpm-config/snapshot/clr-rpm-config-277.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -32,10 +32,10 @@ license components for the clr-rpm-config package.
 
 
 %prep
-%setup -q -n clr-rpm-config-276
-cd %{_builddir}/clr-rpm-config-276
+%setup -q -n clr-rpm-config-277
+cd %{_builddir}/clr-rpm-config-277
 pushd ..
-cp -a clr-rpm-config-276 buildavx2
+cp -a clr-rpm-config-277 buildavx2
 popd
 
 %build
@@ -43,7 +43,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1717058810
+export SOURCE_DATE_EPOCH=1717101213
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -86,7 +86,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1717058810
+export SOURCE_DATE_EPOCH=1717101213
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/clr-rpm-config
 cp %{_builddir}/clr-rpm-config-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/clr-rpm-config/4cc77b90af91e615a64ae04893fdffa7939db84c || :
